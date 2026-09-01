@@ -1,18 +1,23 @@
+const db = require("../db/queries");
 
-function all_products (req, res) {
-    res.send('all products');
+async function all_products (req, res) {
+    const products = await db.getAllproducts();
+    res.send({products:products});
 }
 
-function all_categories (req, res) {
-    res.send('all categories');
+async function all_categories (req, res) {
+    const rows = await db.getCategories();
+    res.send({'all categories': rows});
 }
 
-function category_get (req, res) {
-    res.send('category: ' + req.params.category);
+async function category_get (req, res) {
+    const rows = await db.category_get(req.params.category);
+    res.send({category: rows});
 }
 
-function item_get (req, res) {
-    res.send('item: ' + req.params.id);
+async function item_get (req, res) {
+    const item = await db.item_get(req.params.id);
+    res.send({item: item});
 }
 
 module.exports = {

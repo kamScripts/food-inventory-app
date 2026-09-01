@@ -172,7 +172,7 @@ VALUES
 async function main() {
     console.log('seeding...');
     const client = new Client({
-        connectionString: `postgresql://${process.env.SEED_USER}:${process.env.SEED_PASS}@localhost:${process.env.DB_PORT}/food_inventory`,
+        connectionString: `post gresql://${process.env.SEED_USER}:${process.env.SEED_PASS}@localhost:${process.env.DB_PORT}/food_inventory`,
     });
     await client.connect();
     await client.query(SQL);

@@ -9,18 +9,80 @@
     <h1>Food Inventory</h1>
     <!-- add partial elements as nav and other repetitve elements -->
     <form method="POST" action="/inventory">
-        <h2>Add new item</h2>
-        <label for="product-name">Product:</label>
-        <input type="text" name="product-name" id="product-name">
-        <label for="category-name">Category:</label>
-        <select name="category-select" id="category-select">
-<% if (locals.categories.length) { %>
-    <% locals.categories.forEach(cat => { %>
-        <option value="<%= cat.id %>"><%= cat.name %></option>
-    <% }); %>
-    <% } %>
-        <option value="new">➕ new</option>
-        </select>
+        <h2>New Item form</h2>
+        <fieldset>
+            <legend>Product Information</legend>
+            <!--Product-name input
+            TODO: autocomplete-dropdown on change
+            -->
+            <label for="product-name">Product:</label>
+            <input type="text" name="product-name" id="product-name">
+            <!--Category Select-->
+            <label for="category-name">Category:</label>
+            <select name="category-select" id="category-select">
+                <option value="">-- choose --</option>
+<% locals.categories.forEach(cat => { %>
+                <option value="<%= cat.id %>"><%= cat.name %></option>
+<% }); %>
+                <option value="new">➕ new</option>
+            </select>
+            <!--Subtype Select-->
+            <label for="subtype">Subcategory:</label>
+            <select name="subtype-name" id="subtype-name">
+                <option value="">-- choose --</option>
+<% locals.subtypes.forEach(st => { %>
+                <option value="<%= st.id %>"><%= st.name %></option>
+<% }) %>    
+                <option value="new">➕ new</option>
+            </select>
+            <!--Brand select-->
+            <label for="brand-name">Brand:</label>
+            <select name="brand-name" id="brand-name">
+<% locals.brands.forEach(brand => { %>
+        <option value="brand.id"><%= brand.name %></option>
+<% }); %>
+
+            <option value="new">➕ new</option>
+            </select>
+            <!--weight and unit of meassure-->
+            <label for="weight-input">Weight:</label>
+            <input type="number" name="weight-input" id="weight input" min="0" max="9999">
+            <label for="weight-unit">unit:</label>
+            <select>
+                <option value="">-- choose --</option>
+<% locals.units.forEach(unit => { %>
+            <option value="<%= unit.id %>"><%= unit.name %></option>
+<% }); %>
+            </select>
+            <!--Price input-->
+            <label for="price-input">Price:</label>
+             £ <input type="number" name="price-input" id="price-input">
+        </fieldset>
+        <fieldset>
+            <legend>Item information</legend>
+            <!-- Quantity-input -->
+            <label for="quantity-input">Quantity:</label>
+            <input type="number" name="quantity-input" id="quantity-input" min="1" max="99" step="1">
+            <!-- purchase date -->
+            <label for="purchase-date">Purchase date:</label>
+            <input type="date" name="purchase-date" id="purchase-date">
+            <!-- expiration date -->
+            <label for="exp-date">Expiration date:</label>
+            <input type="date" name="exp-date" id="exp-date">
+            <!-- Storage location -->
+             <label for="storage-input">Location: </label>
+             <select>
+                <option value="">-- choose --</option>
+<% locals.storage.forEach(loc => { %>
+                <option value="<%= loc.id %>"><%= loc.name %></option>
+<% }); %>
+                <option value="new">➕ new</option>
+             </select>                       
+        </fieldset>
+        <fieldset>
+            <legend>Add item to the inventory</legend>  
+            <input type="submit" value="submit">             
+        </fieldset>
     </form>
 </body>
 </html>

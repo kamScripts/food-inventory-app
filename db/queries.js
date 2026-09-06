@@ -8,7 +8,7 @@ async function getAll(table) {
     if (!ALLOWED_TABLES.includes(table)) {
         throw new Error('Unknown table '+table);
     }
-    const { rows } = await pool.query(`SELECT * FROM ${table}`);
+    const { rows } = await pool.query(`SELECT * FROM ${table} ORDER BY name`);
     return rows;
 }
 // retrive all from single table

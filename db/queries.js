@@ -1,7 +1,28 @@
 //TODO: validation
 //TODO: post,put,delete
 const pool = require('./pool');
+const ALLOWED_TABLES = [
+    'category', 'subtype', 'brand', 'unit', 'product', 'storage', 'items'
+];
+async function getAll(table) {
+    if (!ALLOWED_TABLES.includes(table)) {
+        throw new Error('Unknown table '+table);
+    }
+    const { rows } = await pool.query(`SELECT * FROM ${table}`);
+    return rows;
+}
+// retrive all from single table
+const getCategories = () => getAll('category');
+const getSubtypes = () => getAll('subtype');
+const getBrands = () => getAll('brand');
+const getStorage = () => getAll('storage');
+const getUnits = () => getAll('unit')
+const getProducts = () => getAll('product');
+const getItems = () => getAll('items');
 
+
+
+// get all items
 async function getAllproducts(){
     const { rows } = await pool.query(
         `SELECT
@@ -20,12 +41,7 @@ async function getAllproducts(){
     );
     return rows;
 }
-
-async function getCategories() {
-    const { rows } = await pool.query('SELECT * FROM category');
-    return rows;
-}
-
+// all from given category
 async function category_get (name) {
     const { rows } =  await pool.query(
         `SELECT
@@ -45,6 +61,7 @@ async function category_get (name) {
         `, [name]);
         return rows;
 }
+//single item
 async function item_get (id) {
     const { rows } = await pool.query(
         `SELECT
@@ -70,7 +87,13 @@ async function item_get (id) {
 
 module.exports = {
     getAllproducts,
-    getCategories,
     category_get,
-    item_get
+    item_get,
+    getCategories,
+    getBrands,
+    getSubtypes,
+    getUnits,
+    getStorage,
+    getProducts,
+    getItems
 }

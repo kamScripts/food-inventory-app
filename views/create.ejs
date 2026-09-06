@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Inventory</title>
+</head>
+<body>
+    <h1>Food Inventory</h1>
+    <!-- add partial elements as nav and other repetitve elements -->
+    <form method="POST" action="/inventory">
+        <h2>Add new item</h2>
+        <label for="product-name">Product:</label>
+        <input type="text" name="product-name" id="product-name">
+        <label for="category-name">Category:</label>
+        <select name="category-select" id="category-select">
+<% if (locals.categories.length) { %>
+    <% locals.categories.forEach(cat => { %>
+        <option value="<%= cat.id %>"><%= cat.name %></option>
+    <% }); %>
+    <% } %>
+        <option value="new">➕ new</option>
+        </select>
+    </form>
+</body>
+</html>
